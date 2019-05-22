@@ -1,0 +1,37 @@
+/* REF: https://dzone.com/articles/how-to-create-an-immutable-class-in-java
+Usage
+-----
+
+Multi thread
+Keys in Maps
+
+Ex: String and Wrapper classes.
+
+1 Class final
+2 Fields final
+3 No setter methods.
+4 When exposing methods which modify the state of the class, you must always return a new instance of the class.
+
+  public Age getAge() {
+    Age cloneAge = new Age();
+    cloneAge.setDay(this.age.getDay());
+    cloneAge.setMonth(this.age.getMonth());
+    cloneAge.setYear(this.age.getYear());
+    return cloneAge;
+}
+
+5 If the class holds a mutable object:
+ Inside the constructor, make sure to use a clone copy of the passed argument and never set your mutable field to the real instance passed through constructor, this is to prevent the clients who pass the object from modifying it afterwards.
+ Make sure to always return a clone copy of the field and never return the real object instance.
+*/ 
+
+  public ImmutableStudent(int id, String name, Age age) {
+    this.name = name;
+    this.id = id;
+    Age cloneAge = new Age();
+    cloneAge.setDay(age.getDay());
+    cloneAge.setMonth(age.getMonth());
+    cloneAge.setYear(age.getYear());
+    this.age = cloneAge;
+}
+
