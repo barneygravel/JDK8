@@ -1,0 +1,75 @@
+//REF: https://www.callicoder.com/java-singleton-design-pattern-example/
+
+//Private constructor to prevent others from instantiating the class.
+
+// during class loading in a static field/block, or on-demand in a static method 
+
+public class LazyDoubleCheckedLockingSingleton {
+
+    private static volatile LazyDoubleCheckedLockingSingleton instance;
+
+    /** private constructor to prevent others from instantiating this class */
+    private LazyDoubleCheckedLockingSingleton() {}
+
+    /** Lazily initialize the singleton in a synchronized block */
+    public static LazyDoubleCheckedLockingSingleton getInstance() {
+        if(instance == null) {
+            synchronized (LazyDoubleCheckedLockingSingleton.class) {
+                // double-check
+                if(instance == null) {
+                    instance = new LazyDoubleCheckedLockingSingleton();
+                }
+            }
+        }
+        return instance;
+    }
+}
+
+//-------------------------------------------------------------------------//
+
+// Bill Pugh singleton 
+
+public class LazyInnerClassSingleton {
+
+    /** private constructor to prevent others from instantiating this class */
+    private LazyInnerClassSingleton() {}
+
+    /** This inner class is loaded only after getInstance() is called for the first time. */
+    private static class SingletonHelper {
+        private static final LazyInnerClassSingleton INSTANCE = new LazyInnerClassSingleton();
+    }
+
+    public static LazyInnerClassSingleton getInstance() {
+        return SingletonHelper.INSTANCE;
+    }
+}
+
+//-------------------------------------------------------------------------//
+
+// Singletons and Reflection
+
+class MySingleton {
+    private static final MySingleton instance = new MySingleton();
+
+    private MySingleton() {
+        // protect against instantiation via reflection
+        if(instance != null) {
+            throw new IllegalStateException("Singleton already initialized");
+        }
+    }
+
+    public static MySingleton getInstance() {
+        return instance;
+    }
+}
+    
+    
+// Protection against Serialization
+
+// Previous stuff + 
+
+ // implement readResolve method to return the existing instance
+    protected Object readResolve() {
+        return instance;
+    }
+
