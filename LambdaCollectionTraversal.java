@@ -4,8 +4,8 @@ import java.util.*;
 
 public class LambdaCollectionTraversal {
     public static void main(String[] args) {
-        //traverseArrayList();
-        //traverseSet();
+        traverseArrayList();
+        traverseSet();
         traverseMap();
     }
 
@@ -14,8 +14,7 @@ public class LambdaCollectionTraversal {
         al.add("fred");
         al.add("barney");
 
-        // Prints in same lines
-        //((ArrayList) al).forEach(x -> System.out.print(x +","));
+        // Prints in same line
         al.forEach(x -> System.out.print(x +","));
 
         // Prints in different lines
@@ -28,7 +27,7 @@ public class LambdaCollectionTraversal {
         al.add("barney");
         al.add("fred");
 
-        // Prints in same lines
+        // Prints in same line
         al.forEach(x -> System.out.print(x +","));
 
         // Prints in different lines
@@ -42,7 +41,7 @@ public class LambdaCollectionTraversal {
         map.put(1,"fred");
 
         // Prints in same lines
-        map.forEach( (k,v) -> System.out.print("Key: "+ k + " Value: "+v) );
+        map.forEach( (k,v) -> System.out.print("Key: "+ k + " Value: "+ v) );
 
     }
 }
