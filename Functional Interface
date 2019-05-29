@@ -1,0 +1,33 @@
+//REF: https://howtodoinjava.com/java8/functional-interface-tutorial/
+
+ only one abstract method is allowed 
+ valid even if the @FunctionalInterface annotation is omitted.
+ free to add default methods.
+ 
+ @FunctionalInterface
+public interface MyFirstFunctionalInterface
+{
+    public void firstWork();
+ 
+    default void doSomeMoreWork1(){
+    //Method body
+    }
+ 
+    default void doSomeMoreWork2(){
+    //Method body
+    }
+}
+ 
+ abstract method overriding one of the public methods of java.lang.Object, that also does not count toward the interface’s abstract method count
+ 
+ @FunctionalInterface
+public interface MyFirstFunctionalInterface
+{
+    public void firstWork();
+ 
+    @Override
+    public String toString();                //Overridden from Object class
+ 
+    @Override
+    public boolean equals(Object obj);        //Overridden from Object class
+}
